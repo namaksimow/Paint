@@ -1,6 +1,6 @@
 ﻿namespace Paint
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.SuspendLayout();
             // 
-            // Form1
+            // menuStrip
+            // 
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(1027, 24);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "menuStrip";
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1027, 667);
-            this.Name = "Form1";
+            this.Controls.Add(this.menuStrip);
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip;
     }
 }
 
