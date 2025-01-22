@@ -12,21 +12,9 @@ namespace Paint
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        void ConfigureTSMI()
         {
-            InitializeComponent();
-
-            ToolStripMenuItem fileItem = new ToolStripMenuItem("Файл");
-
-            ToolStripMenuItem open = new ToolStripMenuItem("Открыть...");
-            open.Click += open_Click;
-
-            fileItem.DropDownItems.Add("Новый");
-            fileItem.DropDownItems.Add(open);
-            fileItem.DropDownItems.Add("Сохранить");
-            fileItem.DropDownItems.Add("Сохранить как...");
-            fileItem.DropDownItems.Add("Выход");
-            open.ShortcutKeys = Keys.Control | Keys.O;
+            ConfigureTSMIFile();
 
             ToolStripMenuItem pictureItem = new ToolStripMenuItem("Рисунок");
             pictureItem.DropDownItems.Add("Размер холста...");
@@ -40,16 +28,79 @@ namespace Paint
             ToolStripMenuItem helpItem = new ToolStripMenuItem("Справка");
             helpItem.DropDownItems.Add("О программе...");
 
-            menuStrip.Items.Add(fileItem);
+            
             menuStrip.Items.Add(pictureItem);
             menuStrip.Items.Add(windowItem);
             menuStrip.Items.Add(helpItem);
         }
 
-        void open_Click(object sender, EventArgs e)
+        void ConfigureTSMIFile()
         {
-            MessageBox.Show("Открытие");
+            ToolStripMenuItem fileItem = new ToolStripMenuItem("Файл");
+            ToolStripMenuItem fileOpen = new ToolStripMenuItem("Открыть...");
+            ToolStripMenuItem fileNew = new ToolStripMenuItem("Новый");
+            ToolStripMenuItem fileSave = new ToolStripMenuItem("Сохранить");
+            ToolStripMenuItem fileSaveAs = new ToolStripMenuItem("Сохранить как...");
+            ToolStripMenuItem fileExit = new ToolStripMenuItem("Выход");
+
+            fileOpen.Click += FileOpenClick;
+            fileNew.Click += FileNewClick;
+            fileSave.Click += FileSaveClick;
+            fileSaveAs.Click += FileSaveAsClick;
+            fileExit.Click += FileExitClick;
+
+            fileItem.DropDownItems.Add(fileNew);
+            fileItem.DropDownItems.Add(fileOpen);
+            fileItem.DropDownItems.Add(fileSave);
+            fileItem.DropDownItems.Add(fileSaveAs);
+            fileItem.DropDownItems.Add(fileExit);
+
+            fileOpen.ShortcutKeys = Keys.Control | Keys.O;
+            fileNew.ShortcutKeys = Keys.Control | Keys.N;
+            fileSave.ShortcutKeys = Keys.Control | Keys.S;
+            fileSaveAs.ShortcutKeys = Keys.Control | Keys.A;
+            fileExit.ShortcutKeys = Keys.Control | Keys.E;
+
+            menuStrip.Items.Add(fileItem);
         }
+
+        void FileOpenClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Файл - открыть");
+        }
+
+        void FileNewClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Файл - новый");
+        }
+
+        void FileSaveClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Файл - сохранить");
+        }
+
+        void FileSaveAsClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Файл - сохранить как");
+        }
+
+        void FileExitClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Файл - выход");
+        }
+
+
+
+
+
+        public MainForm()
+        {
+            InitializeComponent();
+            ConfigureTSMI();
+            
+        }
+
+        
         
     }
 }
