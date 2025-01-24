@@ -46,6 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationTSMIWindow.cs" />
+    <Compile Include="ConfigureTSMIFile.cs" />
+    <Compile Include="ConfigureTSMIHelp.cs" />
+    <Compile Include="ConfigureTSMIPicture.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
