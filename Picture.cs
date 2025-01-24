@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public class ConfigureTSMIPicture
+    public class Picture
     {
         public void ConfigurePicture(MenuStrip menuStrip)
         {

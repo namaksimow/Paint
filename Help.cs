@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public class ConfigureTSMIHelp
+    public class Help
     {
         public void ConfigureHelp(MenuStrip menuStrip)
         {

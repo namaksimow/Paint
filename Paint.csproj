@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationTSMIWindow.cs" />
-    <Compile Include="ConfigureTSMIFile.cs" />
-    <Compile Include="ConfigureTSMIHelp.cs" />
-    <Compile Include="ConfigureTSMIPicture.cs" />
+    <Compile Include="Window.cs" />
+    <Compile Include="File.cs" />
+    <Compile Include="Help.cs" />
+    <Compile Include="Picture.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +82,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Colors\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,17 +6,17 @@ namespace Paint
     {
         void ConfigureTSMI()
         {
-            ConfigureTSMIFile configFile = new ConfigureTSMIFile();
-            configFile.ConfigureFile(menuStrip);
+            File file = new File();
+            file.ConfigureFile(menuStrip);
 
-            ConfigureTSMIPicture configPicture = new ConfigureTSMIPicture();
-            configPicture.ConfigurePicture(menuStrip);
+            Picture picture = new Picture();
+            picture.ConfigurePicture(menuStrip);
             
-            ConfigurationTSMIWindow configWindow = new ConfigurationTSMIWindow();
-            configWindow.ConfigureWindow(menuStrip);
-            
-            ConfigureTSMIHelp configHelp = new ConfigureTSMIHelp();
-            configHelp.ConfigureHelp(menuStrip);
+            Window window = new Window();
+            window.ConfigureWindow(menuStrip);
+
+            Help help = new Help();
+            help.ConfigureHelp(menuStrip);
         }
 
 
@@ -25,8 +25,5 @@ namespace Paint
             InitializeComponent();
             ConfigureTSMI();
         }
-
-        
-        
     }
 }

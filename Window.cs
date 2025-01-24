@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public class ConfigurationTSMIWindow
+    public class Window
     {
         public void ConfigureWindow(MenuStrip menuStrip)
         {
@@ -33,6 +33,8 @@ namespace Paint
             windowStraight.ShortcutKeys = Keys.Control | Keys.T;
 
             menuStrip.Items.Add(windowItem);
+
+            menuStrip.MdiWindowListItem = windowItem;
         }
 
         private void WindowCascadeClick(object sender, EventArgs e)

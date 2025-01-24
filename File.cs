@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public class ConfigureTSMIFile
+    public class File
     {
         public void ConfigureFile(MenuStrip menuStrip) {
             ToolStripMenuItem fileItem = new ToolStripMenuItem("Файл");
@@ -56,7 +56,7 @@ namespace Paint
 
         private void FileExitClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Файл - выход");
+            Application.Exit();
         }
 
     }
