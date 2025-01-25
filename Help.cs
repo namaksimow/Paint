@@ -16,6 +16,8 @@ namespace Paint
 
             helpItem.DropDownItems.Add(helpAbout);
 
+            helpAbout.Click += HelpAboutClick;
+            
             helpAbout.ShortcutKeys = Keys.Control | Keys.B;
 
             menuStrip.Items.Add(helpItem);
@@ -23,7 +25,8 @@ namespace Paint
 
         private void HelpAboutClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Справка - о программе");
+            var formAbout = new AboutForm();
+            formAbout.ShowDialog();
         }
 
     }

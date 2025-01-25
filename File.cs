@@ -5,7 +5,11 @@ namespace Paint
 {
     public class File
     {
-        public void ConfigureFile(MenuStrip menuStrip) {
+        private MainForm _mainForm;
+
+        public void ConfigureFile(MainForm mainForm, MenuStrip menuStrip) {
+            _mainForm = mainForm;
+
             ToolStripMenuItem fileItem = new ToolStripMenuItem("Файл");
             ToolStripMenuItem fileOpen = new ToolStripMenuItem("Открыть...");
             ToolStripMenuItem fileNew = new ToolStripMenuItem("Новый");
@@ -41,7 +45,9 @@ namespace Paint
 
         private void FileNewClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Файл - новый");
+            var frm = new DocumentForm();
+            frm.MdiParent = _mainForm;
+            frm.Show();
         }
 
         private void FileSaveClick(object sender, EventArgs e)
