@@ -1,6 +1,6 @@
 ﻿namespace Paint
 {
-    partial class DocumentForm
+    partial class CanvasSizeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,18 @@
         {
             this.SuspendLayout();
             // 
-            // DocumentForm
+            // CanvasSizeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 458);
-            this.DoubleBuffered = true;
-            this.Name = "DocumentForm";
-            this.Text = "DocumentForm";
+            this.ClientSize = new System.Drawing.Size(331, 228);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "CanvasSizeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "CanvasSizeForm";
             this.ResumeLayout(false);
 
         }

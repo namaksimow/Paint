@@ -9,26 +9,26 @@ namespace Paint
         public static Color Color { get; set; }
         public static int Width { get; set; }
 
+        public MainForm()
+        {
+            InitializeComponent();
+
+            ConfigureTSMI();
+        }
+
         void ConfigureTSMI()
         {
             File file = new File();
             file.ConfigureFile(this, menuStrip);
 
             Picture picture = new Picture();
-            picture.ConfigurePicture(menuStrip);
-            
+            picture.ConfigurePicture(this, menuStrip);
+
             Window window = new Window();
             window.ConfigureWindow(menuStrip);
 
             Help help = new Help();
             help.ConfigureHelp(menuStrip);
-        }
-
-
-        public MainForm()
-        {
-            InitializeComponent();
-            ConfigureTSMI();
         }
     }
 }

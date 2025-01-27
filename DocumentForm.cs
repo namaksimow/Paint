@@ -12,7 +12,7 @@ namespace Paint
 {
     public partial class DocumentForm : Form
     {
-        private int x, y;
+        /*private int x, y;
 
         private Bitmap bitmap;
         public DocumentForm()
@@ -43,7 +43,7 @@ namespace Paint
         {
             base.OnPaint(e);
             e.Graphics.DrawImage(bitmap, 0, 0);
-        }
+        }*/
     }
 
 }
