@@ -12,9 +12,11 @@ namespace Paint
 {
     public partial class CanvasSizeForm : Form
     {
+        //parameters to DocumentForm
         public int CanvasWidth { get; set; }
         public int CanvasLength { get; set; }
 
+        //elements of form
         private TextBox textWidth;
         private TextBox textLength;
         private Button buttonOk;
@@ -31,6 +33,9 @@ namespace Paint
             InitializeControls();
         }
 
+        /// <summary>
+        /// Initialization of propertys
+        /// </summary>
         private void InitializePropertys()
         {
             this.MinimizeBox = false;
@@ -39,8 +44,12 @@ namespace Paint
             this.StartPosition = FormStartPosition.CenterParent;
         }
 
+        /// <summary>
+        /// Initialization, Configuration of forms elements
+        /// </summary>
         private void InitializeControls()
         {
+            //Initializaion of elements
             textWidth = new TextBox
             {
                 Location = new Point(100, 20),
@@ -74,8 +83,6 @@ namespace Paint
                 Size = new Size(75, 25)
             };
 
-            buttonOk.Click += BtnOKClick;
-
             buttonCancel = new Button
             {
                 Text = "Cancel",
@@ -83,8 +90,11 @@ namespace Paint
                 Size = new Size(75, 25)
             };
 
-            buttonCancel.Click += BtnCancel_Click;
+            //Initialization of actions
+            buttonOk.Click += ButtonOkClick;
+            buttonCancel.Click += ButtonCancelClick;
 
+            //Adding controls
             AcceptButton = buttonOk;
             CancelButton = buttonCancel;
             Controls.Add(textWidth);
@@ -95,7 +105,12 @@ namespace Paint
             Controls.Add(labelLength);
         }
 
-        private void BtnOKClick(object sender, EventArgs e)
+        /// <summary>
+        /// Getting new width and length to DocumentForm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonOkClick(object sender, EventArgs e)
         {
             int width, length;
 
@@ -105,8 +120,8 @@ namespace Paint
                 {
                     CanvasWidth = width;
                     CanvasLength = length;
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
                 else
                 {
@@ -119,10 +134,10 @@ namespace Paint
             }
         }
 
-        private void BtnCancel_Click(object sender, EventArgs e)
+        private void ButtonCancelClick(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
 
     }

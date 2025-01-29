@@ -84,6 +84,7 @@
             this.красныйToolStripMenuItem.Name = "красныйToolStripMenuItem";
             this.красныйToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.красныйToolStripMenuItem.Text = "Красный";
+            this.красныйToolStripMenuItem.Click += new System.EventHandler(this.RedToolStripMenuItem_Click);
             // 
             // зеленыйToolStripMenuItem
             // 

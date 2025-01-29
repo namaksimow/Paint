@@ -6,8 +6,10 @@ namespace Paint
 {
     public class Picture
     {
+        //Mainform parameter
         private MainForm _mainForm;
 
+        //Configuration
         public void ConfigurePicture(MainForm mainForm, MenuStrip menuStrip)
         {
             _mainForm = mainForm;
@@ -25,6 +27,7 @@ namespace Paint
             menuStrip.Items.Add(pictureItem);
         }
 
+        //Adding action to button
         private void FrameSizeClick(object sender, EventArgs e)
         {
             using (CanvasSizeForm canvasSizeForm = new CanvasSizeForm())
@@ -36,6 +39,7 @@ namespace Paint
             }
         }
 
+        //If no DocumentForm, you cant change her size manually
         private void PictureItemDropDownOpening(object sender, EventArgs e)
         {
             ToolStripMenuItem pictureItem = sender as ToolStripMenuItem;
@@ -47,6 +51,7 @@ namespace Paint
             }
         }
 
+        //Updating DocumentForm size
         private void UpdateChildFormSize(int newWidth, int newLength)
         {
             if (_mainForm.ActiveMdiChild is Form childForm)

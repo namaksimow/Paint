@@ -7,9 +7,11 @@ namespace Paint
     {
         private MainForm _mainForm;
 
+        //Configuratoin if file button
         public void ConfigureFile(MainForm mainForm, MenuStrip menuStrip) {
             _mainForm = mainForm;
 
+            //Adding child elements
             ToolStripMenuItem fileItem = new ToolStripMenuItem("Файл");
             ToolStripMenuItem fileOpen = new ToolStripMenuItem("Открыть...");
             ToolStripMenuItem fileNew = new ToolStripMenuItem("Новый");
@@ -17,24 +19,28 @@ namespace Paint
             ToolStripMenuItem fileSaveAs = new ToolStripMenuItem("Сохранить как...");
             ToolStripMenuItem fileExit = new ToolStripMenuItem("Выход");
 
+            //Adding buttons
             fileItem.DropDownItems.Add(fileNew);
             fileItem.DropDownItems.Add(fileOpen);
             fileItem.DropDownItems.Add(fileSave);
             fileItem.DropDownItems.Add(fileSaveAs);
             fileItem.DropDownItems.Add(fileExit);
 
+            //Adding action
             fileOpen.Click += FileOpenClick;
             fileNew.Click += FileNewClick;
             fileSave.Click += FileSaveClick;
             fileSaveAs.Click += FileSaveAsClick;
             fileExit.Click += FileExitClick;
 
+            //Adding chortcuts
             fileOpen.ShortcutKeys = Keys.Control | Keys.O;
             fileNew.ShortcutKeys = Keys.Control | Keys.N;
             fileSave.ShortcutKeys = Keys.Control | Keys.S;
             fileSaveAs.ShortcutKeys = Keys.Control | Keys.A;
             fileExit.ShortcutKeys = Keys.Control | Keys.E;
 
+            //Add all to MenuStrip
             menuStrip.Items.Add(fileItem);
         }
 
@@ -43,6 +49,7 @@ namespace Paint
             MessageBox.Show("Файл - открыть");
         }
 
+        //open new DocumentForm
         private void FileNewClick(object sender, EventArgs e)
         {
             var frm = new DocumentForm();
@@ -60,6 +67,7 @@ namespace Paint
             MessageBox.Show("Файл - сохранить как");
         }
 
+        //Exit MainForm
         private void FileExitClick(object sender, EventArgs e)
         {
             Application.Exit();

@@ -6,16 +6,13 @@ namespace Paint
 {
     public partial class MainForm : Form
     {
-        public static Color Color { get; set; }
-        public static int Width { get; set; }
-
         public MainForm()
         {
             InitializeComponent();
-
             ConfigureTSMI();
         }
 
+        //Configuration of ToolStripMenuItem panel
         void ConfigureTSMI()
         {
             File file = new File();
@@ -29,6 +26,14 @@ namespace Paint
 
             Help help = new Help();
             help.ConfigureHelp(menuStrip);
+        }
+
+        public static Color Color { get; set; }
+        public static int Width { get; set; }
+
+        private void RedToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            Color = Color.Red;
         }
     }
 }

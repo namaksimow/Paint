@@ -12,28 +12,40 @@ namespace Paint
 {
     public partial class DocumentForm : Form
     {
-        /*private int x, y;
+        private int x, y;
 
         private Bitmap bitmap;
         public DocumentForm()
         {
             InitializeComponent();
-            bitmap = new Bitmap(300, 200);
+            Configuration();
+            bitmap = new Bitmap(this.Width, this.Height);
         }
 
-        private void DocumentForm_MouseDown(object sender, MouseEventArgs e)
+        //Configuration actions
+        private void Configuration()
+        {
+            this.MouseMove += DocumentFormMouseMove;
+            this.MouseDown += DocumentFormMouseDown;
+            this.Resize += DocumentFormResize;
+        }
+
+        //Start of paint
+        private void DocumentFormMouseDown(object sender, MouseEventArgs e)
         {
             x = e.X;
             y = e.Y;
         }
 
-        private void DocumentForm_MouseMove(object sender, MouseEventArgs e)
+        //Paint when mouse is move
+        private void DocumentFormMouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
                 Graphics g = Graphics.FromImage(bitmap);
                 g.DrawLine(new Pen(MainForm.Color, MainForm.Width), x, y, e.X, e.Y);
                 Invalidate();
+                Update();
                 x = e.X;
                 y = e.Y;
             }
@@ -43,7 +55,24 @@ namespace Paint
         {
             base.OnPaint(e);
             e.Graphics.DrawImage(bitmap, 0, 0);
-        }*/
+        }
+
+        //Dynamical change of bitmap if resize of form
+        private void DocumentFormResize(object sender, EventArgs e)
+        {
+            Bitmap newBitmap = new Bitmap(ClientSize.Width, ClientSize.Height);
+
+            //transfer image from old to new bitmap
+            using (Graphics g = Graphics.FromImage(newBitmap))
+            {
+                g.DrawImage(bitmap, 0, 0);
+            }
+
+            bitmap.Dispose();
+            bitmap = newBitmap;
+
+            Invalidate(); 
+        }
     }
 
 }

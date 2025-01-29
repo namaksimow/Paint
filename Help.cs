@@ -9,6 +9,7 @@ namespace Paint
 {
     public class Help
     {
+        //Configuration of help button
         public void ConfigureHelp(MenuStrip menuStrip)
         {
             ToolStripMenuItem helpItem = new ToolStripMenuItem("Справка");
@@ -23,6 +24,7 @@ namespace Paint
             menuStrip.Items.Add(helpItem);
         }
 
+        //Click and get AboutForm
         private void HelpAboutClick(object sender, EventArgs e)
         {
             var formAbout = new AboutForm();
