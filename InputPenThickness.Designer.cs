@@ -1,6 +1,6 @@
 ﻿namespace Paint
 {
-    partial class DocumentForm
+    partial class InputPenThickness
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // DocumentForm
+            // InputPenThickness
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(823, 390);
-            this.DoubleBuffered = true;
-            this.Name = "DocumentForm";
-            this.Text = "DocumentForm";
+            this.ClientSize = new System.Drawing.Size(233, 138);
+            this.Name = "InputPenThickness";
+            this.Text = "InputPenThickness";
             this.ResumeLayout(false);
 
         }

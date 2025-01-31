@@ -6,6 +6,11 @@ namespace Paint
 {
     public partial class MainForm : Form
     {
+        //Setting to paint
+        public static Color Color { get; set; }
+
+        public static int Width {  get; set; }
+
         public MainForm()
         {
             InitializeComponent();
@@ -22,18 +27,47 @@ namespace Paint
             picture.ConfigurePicture(this, menuStrip);
 
             Window window = new Window();
-            window.ConfigureWindow(menuStrip);
+            window.ConfigureWindow(this, menuStrip);
 
             Help help = new Help();
             help.ConfigureHelp(menuStrip);
         }
 
-        public static Color Color { get; set; }
-        public static int Width { get; set; }
-
-        private void RedToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void RedToolStripMenuItemClick(object sender, System.EventArgs e)
         {
             Color = Color.Red;
+        }
+
+        private void GreenToolStripMenuItemClick(object sender, System.EventArgs e)
+        {
+            Color = Color.Green;
+        }
+
+        private void BlueToolStripMenuItemClick(object sender, System.EventArgs e)
+        {
+            Color = Color.Blue;
+        }
+
+        //Palette with multiple colors
+        private void AnotherColorToolStripMenuItemClick(object sender, System.EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+
+            if (colorDialog.ShowDialog() == DialogResult.OK) 
+            { 
+                Color = colorDialog.Color;
+            }
+        }
+
+        private void SetPenThickness(object sender, System.EventArgs e)
+        {
+            using (InputPenThickness inputPenThickness = new InputPenThickness())
+            {
+                if (inputPenThickness.ShowDialog() == DialogResult.OK)
+                {
+                    DocumentForm.penThickness = inputPenThickness.PenThickness;
+                }
+            }
         }
     }
 }

@@ -9,9 +9,12 @@ namespace Paint
 {
     public class Window
     {
+        private MainForm _mainForm;
+
         //Configuration of window button
-        public void ConfigureWindow(MenuStrip menuStrip)
+        public void ConfigureWindow(MainForm mainForm, MenuStrip menuStrip)
         {
+            _mainForm = mainForm;
             //Adding child buttons
             ToolStripMenuItem windowItem = new ToolStripMenuItem("Окно");
             ToolStripMenuItem windowCascade = new ToolStripMenuItem("Каскадом");
@@ -44,22 +47,22 @@ namespace Paint
 
         private void WindowCascadeClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Окно - каскад");
+            _mainForm.LayoutMdi(MdiLayout.Cascade);
         }
 
         private void WindowLeftToRightClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Окно - слева направо");
+            _mainForm.LayoutMdi(MdiLayout.TileHorizontal);
         }
 
         private void WindowUpToDownClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Окно - сверзу вниз");
+            _mainForm.LayoutMdi(MdiLayout.TileVertical);
         }
 
         private void WindowStraightClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Окно - упорядочить значки");
+            _mainForm.LayoutMdi(MdiLayout.ArrangeIcons);
         }
     }
 }

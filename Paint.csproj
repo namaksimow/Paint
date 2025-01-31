@@ -64,6 +64,12 @@
     <Compile Include="DocumentForm.Designer.cs">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InputPenThickness.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputPenThickness.Designer.cs">
+      <DependentUpon>InputPenThickness.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window.cs" />
     <Compile Include="File.cs" />
     <Compile Include="Help.cs" />
@@ -84,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputPenThickness.resx">
+      <DependentUpon>InputPenThickness.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

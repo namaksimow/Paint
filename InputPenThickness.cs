@@ -10,13 +10,10 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public partial class CanvasSizeForm : Form
+    public partial class InputPenThickness : Form
     {
-        //parameters to DocumentForm
-        public int CanvasWidth { get; set; }
-        public int CanvasLength { get; set; }
+        public int PenThickness { get; set; }
 
-        //elements of form
         private TextBox textWidth;
         private TextBox textLength;
         private Button buttonOk;
@@ -24,18 +21,13 @@ namespace Paint
         private Label labelWidth;
         private Label labelLength;
 
-        public CanvasSizeForm()
+        public InputPenThickness()
         {
             InitializeComponent();
-
             InitializePropertys();
-            
             InitializeControls();
         }
 
-        /// <summary>
-        /// Initialization of propertys
-        /// </summary>
         private void InitializePropertys()
         {
             this.MinimizeBox = false;
@@ -44,9 +36,6 @@ namespace Paint
             this.StartPosition = FormStartPosition.CenterParent;
         }
 
-        /// <summary>
-        /// Initialization, Configuration of forms elements
-        /// </summary>
         private void InitializeControls()
         {
             //Initializaion of elements
@@ -56,23 +45,10 @@ namespace Paint
                 Size = new Size(120, 20)
             };
 
-            textLength = new TextBox
-            {
-                Location = new Point(100, 60),
-                Size = new Size(120, 20)
-            };
-
             labelWidth = new Label
             {
-                Text = "Ширина:",
+                Text = "Толщина:",
                 Location = new Point(20, 20),
-                Size = new Size(80, 20)
-            };
-
-            labelLength = new Label
-            {
-                Text = "Высота:",
-                Location = new Point(20, 60),
                 Size = new Size(80, 20)
             };
 
@@ -105,32 +81,26 @@ namespace Paint
             Controls.Add(labelLength);
         }
 
-        /// <summary>
-        /// Getting new width and length to DocumentForm
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ButtonOkClick(object sender, EventArgs e)
         {
-            int width, length;
+            int thickness;
 
-            if (int.TryParse(textWidth.Text, out width) && int.TryParse(textLength.Text, out length))
+            if (int.TryParse(textWidth.Text, out thickness))
             {
-                if (width > 0 && length > 0)
+                if (thickness >= 0)
                 {
-                    CanvasWidth = width;
-                    CanvasLength = length;
+                    PenThickness = thickness;
                     DialogResult = DialogResult.OK;
                     Close();
                 }
                 else
                 {
-                    MessageBox.Show("Размеры должны быть положительными числами");
+                    MessageBox.Show("Толщина пера должна быть неотрицательным числом");
                 }
             }
             else
             {
-                MessageBox.Show("Введите корректные значения для размеров");
+                MessageBox.Show("Введите корректное значение для толщины пера");
             }
         }
 

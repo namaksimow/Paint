@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace Paint
@@ -27,6 +28,7 @@ namespace Paint
             fileItem.DropDownItems.Add(fileExit);
 
             //Adding action
+            fileItem.DropDownOpening += FileItemDropDownOpening;
             fileOpen.Click += FileOpenClick;
             fileNew.Click += FileNewClick;
             fileSave.Click += FileSaveClick;
@@ -44,9 +46,33 @@ namespace Paint
             menuStrip.Items.Add(fileItem);
         }
 
+        private void FileItemDropDownOpening(object sender, EventArgs e)
+        {
+            ToolStripMenuItem fileItem = sender as ToolStripMenuItem;
+
+            if (fileItem != null)
+            {
+                ToolStripMenuItem fileSave = fileItem.DropDownItems[2] as ToolStripMenuItem;
+                fileSave.Enabled = !(_mainForm.ActiveMdiChild == null);
+
+                ToolStripMenuItem fileSaveAs = fileItem.DropDownItems[3] as ToolStripMenuItem;
+                fileSaveAs.Enabled = !(_mainForm.ActiveMdiChild == null);
+            }
+        }
+
         private void FileOpenClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Файл - открыть");
+            var frm = new DocumentForm();
+            frm.MdiParent = _mainForm;
+
+            if (frm.Open()) 
+            {
+                frm.Show(); 
+            }
+            else
+            {
+                frm.Dispose(); 
+            }
         }
 
         //open new DocumentForm
@@ -59,12 +85,12 @@ namespace Paint
 
         private void FileSaveClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Файл - сохранить");
+            DocumentForm.SaveFile();
         }
 
         private void FileSaveAsClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Файл - сохранить как");
+            DocumentForm.SaveFileAs();
         }
 
         //Exit MainForm
