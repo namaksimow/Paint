@@ -85,12 +85,20 @@ namespace Paint
 
         private void FileSaveClick(object sender, EventArgs e)
         {
-            DocumentForm.SaveFile();
+            DocumentForm activeDocument = _mainForm.ActiveMdiChild as DocumentForm;
+            if (activeDocument != null)
+            {
+                activeDocument.SaveFile();
+            }
         }
 
         private void FileSaveAsClick(object sender, EventArgs e)
         {
-            DocumentForm.SaveFileAs();
+            DocumentForm activeDocument = _mainForm.ActiveMdiChild as DocumentForm;
+            if (activeDocument != null)
+            {
+                activeDocument.SaveFileAs();
+            }
         }
 
         //Exit MainForm
@@ -98,6 +106,5 @@ namespace Paint
         {
             Application.Exit();
         }
-
     }
 }

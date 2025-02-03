@@ -8,15 +8,15 @@ namespace Paint
 {
     public partial class DocumentForm : Form
     {
-        public static string currentFilePath = null;
+        public string currentFilePath = null;
 
-        public static ImageFormat currentFormat = null;
+        public ImageFormat currentFormat = null;
 
         public static int penThickness = 0;
 
         private int x, y;
 
-        public static Bitmap bitmap { get; set; }
+        public Bitmap bitmap { get; set; }
         public DocumentForm()
         {
             InitializeComponent();
@@ -111,7 +111,7 @@ namespace Paint
             }
         }
 
-        public static void SaveFile()
+        public void SaveFile()
         {
             if (currentFilePath == null)
             {
@@ -130,7 +130,7 @@ namespace Paint
             }
         }
 
-        public static void SaveFileAs() 
+        public void SaveFileAs() 
         {
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.AddExtension = true;
@@ -182,7 +182,22 @@ namespace Paint
             return false; 
         }
 
-    }
 
+        public static void SetPenThickness(object sender, System.EventArgs e)
+        {
+            using (InputPenThickness inputPenThickness = new InputPenThickness())
+            {
+                if (inputPenThickness.ShowDialog() == DialogResult.OK)
+                {
+                    penThickness = inputPenThickness.PenThickness;
+                }
+            }
+        }
+
+        public void FileSaveClick(object sender, EventArgs e)
+        {
+            this.SaveFile();
+        }
+    }
 }
 

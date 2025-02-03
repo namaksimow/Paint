@@ -58,16 +58,5 @@ namespace Paint
                 Color = colorDialog.Color;
             }
         }
-
-        private void SetPenThickness(object sender, System.EventArgs e)
-        {
-            using (InputPenThickness inputPenThickness = new InputPenThickness())
-            {
-                if (inputPenThickness.ShowDialog() == DialogResult.OK)
-                {
-                    DocumentForm.penThickness = inputPenThickness.PenThickness;
-                }
-            }
-        }
     }
 }
