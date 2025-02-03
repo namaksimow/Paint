@@ -103,10 +103,34 @@ namespace Paint
             }
         }
 
-        //Exit MainForm
         private void FileExitClick(object sender, EventArgs e)
         {
-            Application.Exit();
+            DocumentForm activeDocument = _mainForm.ActiveMdiChild as DocumentForm;
+
+            if (activeDocument != null) 
+            {
+                DialogResult dialpgResult = MessageBox.Show(
+                    "Вы хотите сохранить изменения перед выходом?",
+                    "Сохранение документа",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question
+       );
+
+                if (dialpgResult == DialogResult.Yes)
+                {
+                    activeDocument.SaveFile();
+                    Application.Exit();     
+                }
+                else if (dialpgResult == DialogResult.No)
+                {
+                    activeDocument.Close(); 
+                    Application.Exit();
+                }
+            }
+            else 
+            {
+                Application.Exit();
+            }
         }
     }
 }
