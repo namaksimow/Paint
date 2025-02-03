@@ -23,12 +23,14 @@ namespace Paint
             //Adding buttons
             fileItem.DropDownItems.Add(fileNew);
             fileItem.DropDownItems.Add(fileOpen);
+            fileItem.DropDownItems.Insert(2, new ToolStripSeparator());
             fileItem.DropDownItems.Add(fileSave);
             fileItem.DropDownItems.Add(fileSaveAs);
+            fileItem.DropDownItems.Insert(5, new ToolStripSeparator());
             fileItem.DropDownItems.Add(fileExit);
 
             //Adding action
-            fileItem.DropDownOpening += FileItemDropDownOpening;
+            fileItem.DropDownOpened += FileItemDropDownOpening;
             fileOpen.Click += FileOpenClick;
             fileNew.Click += FileNewClick;
             fileSave.Click += FileSaveClick;
@@ -52,10 +54,10 @@ namespace Paint
 
             if (fileItem != null)
             {
-                ToolStripMenuItem fileSave = fileItem.DropDownItems[2] as ToolStripMenuItem;
+                ToolStripMenuItem fileSave = fileItem.DropDownItems[3] as ToolStripMenuItem;
                 fileSave.Enabled = !(_mainForm.ActiveMdiChild == null);
 
-                ToolStripMenuItem fileSaveAs = fileItem.DropDownItems[3] as ToolStripMenuItem;
+                ToolStripMenuItem fileSaveAs = fileItem.DropDownItems[4] as ToolStripMenuItem;
                 fileSaveAs.Enabled = !(_mainForm.ActiveMdiChild == null);
             }
         }
