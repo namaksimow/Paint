@@ -50,7 +50,6 @@ namespace Paint
                 {
                     using (Brush brush = new SolidBrush(MainForm.Color)) 
                     {
-                        //Drawing circles
                         DrawCirclesBetween(x, y, e.X, e.Y, g, brush);
                     }
                 }
@@ -101,6 +100,7 @@ namespace Paint
                 //transfer image from old to new bitmap
                 using (Graphics g = Graphics.FromImage(newBitmap))
                 {
+                    g.Clear(Color.White);
                     g.DrawImage(bitmap, 0, 0);
                 }
 
@@ -183,7 +183,7 @@ namespace Paint
         }
 
 
-        public static void SetPenThickness(object sender, System.EventArgs e)
+        public static void SetPenThickness(object sender, EventArgs e)
         {
             using (InputPenThickness inputPenThickness = new InputPenThickness())
             {
@@ -196,7 +196,7 @@ namespace Paint
 
         public void FileSaveClick(object sender, EventArgs e)
         {
-            this.SaveFile();
+            SaveFile();
         }
     }
 }

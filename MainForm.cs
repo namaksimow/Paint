@@ -58,5 +58,28 @@ namespace Paint
                 Color = colorDialog.Color;
             }
         }
+
+        private void ChangeIconSetPenThickness(object sender, System.EventArgs e)
+        {
+            if (DocumentForm.penThickness == 0)
+            {
+                toolStripButton1.Image = Image.FromFile("C:\\notSystem\\vcs\\Paint\\Images\\nothing.png");
+            }
+
+            if (DocumentForm.penThickness > 0 && DocumentForm.penThickness < 5)
+            {
+                toolStripButton1.Image = Image.FromFile("C:\\notSystem\\vcs\\Paint\\Images\\small.png");
+            }
+
+            if (DocumentForm.penThickness >= 5 && DocumentForm.penThickness < 15)
+            {
+                toolStripButton1.Image = Image.FromFile("C:\\notSystem\\vcs\\Paint\\Images\\medium.png");
+            }
+
+            if (DocumentForm.penThickness >= 15)
+            {
+                toolStripButton1.Image = Image.FromFile("C:\\notSystem\\vcs\\Paint\\Images\\large.png");
+            }
+        }
     }
 }
