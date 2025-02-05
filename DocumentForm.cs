@@ -40,6 +40,8 @@ namespace Paint
             x = e.X;
             y = e.Y;
         }
+            }
+        }
 
         //Paint when mouse is move
         private void DocumentFormMouseMove(object sender, MouseEventArgs e)
@@ -50,6 +52,8 @@ namespace Paint
                 {
                     using (Brush brush = new SolidBrush(MainForm.Color)) 
                     {
+                        if (currentTool == Tool.Pencil)
+                        {
                         DrawCirclesBetween(x, y, e.X, e.Y, g, brush);
                     }
                 }
