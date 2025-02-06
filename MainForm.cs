@@ -1,13 +1,17 @@
 ﻿using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
+using static Paint.DocumentForm;
 
 namespace Paint
 {
     public partial class MainForm : Form
     {
         //Setting to paint
-        public static Color Color { get; set; }
+        public static Color currentColor { get; set; }
+
+        public static Color eraserColor = Color.White;
+
+        public static Color lastColor;
 
         public static int Width {  get; set; }
 
@@ -35,17 +39,17 @@ namespace Paint
 
         private void RedToolStripMenuItemClick(object sender, System.EventArgs e)
         {
-            Color = Color.Red;
+            currentColor = Color.Red;
         }
 
         private void GreenToolStripMenuItemClick(object sender, System.EventArgs e)
         {
-            Color = Color.Green;
+            currentColor = Color.Green;
         }
 
         private void BlueToolStripMenuItemClick(object sender, System.EventArgs e)
         {
-            Color = Color.Blue;
+            currentColor = Color.Blue;
         }
 
         //Palette with multiple colors
@@ -55,7 +59,7 @@ namespace Paint
 
             if (colorDialog.ShowDialog() == DialogResult.OK) 
             { 
-                Color = colorDialog.Color;
+                currentColor = colorDialog.Color;
             }
         }
 
@@ -80,6 +84,37 @@ namespace Paint
             {
                 toolStripButton1.Image = Image.FromFile("C:\\notSystem\\vcs\\Paint\\Images\\large.png");
             }
+        }
+
+        private void ChangeToolToPencil(object sender, System.EventArgs e)
+        {
+            SetTool(Tool.Pencil);
+        }
+
+        private void ChangeToolToLine(object sender, System.EventArgs e)
+        {
+            SetTool(Tool.Line);
+        }
+
+        private void ChangeToolToCircle(object sender, System.EventArgs e)
+        {
+            SetTool(Tool.Circle);
+        }
+
+        private void ChangeToolToEraser(object sender, System.EventArgs e)
+        {
+            lastColor = currentColor;
+            currentTool = Tool.Pencil;
+            currentColor = eraserColor;
+        }
+
+        private void SetTool(Tool tool)
+        {
+            if (currentTool == Tool.Pencil && currentColor == eraserColor)
+            {
+                currentColor = lastColor;
+            }
+            currentTool = tool;
         }
     }
 }

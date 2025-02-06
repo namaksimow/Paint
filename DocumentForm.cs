@@ -14,9 +14,15 @@ namespace Paint
 
         public static int penThickness = 0;
 
+        public enum Tool {Nothing, Pencil, Line, Circle, Eraser}
+
+        public static Tool currentTool = Tool.Nothing;
+
         private int x, y;
 
         public Bitmap bitmap { get; set; }
+
+        private Bitmap bitmapTemp;
         public DocumentForm()
         {
             InitializeComponent();
@@ -31,15 +37,17 @@ namespace Paint
         {
             this.MouseMove += DocumentFormMouseMove;
             this.MouseDown += DocumentFormMouseDown;
+            this.MouseUp += DocumentFormMouseUp;
             this.Resize += DocumentFormResize;
         }
 
         //Start of paint
         private void DocumentFormMouseDown(object sender, MouseEventArgs e)
         {
-            x = e.X;
-            y = e.Y;
-        }
+            if (e.Button == MouseButtons.Left)
+            {
+                x = e.X;
+                y = e.Y;
             }
         }
 
@@ -48,20 +56,46 @@ namespace Paint
         {
             if (e.Button == MouseButtons.Left)
             {
-                using (Graphics g = Graphics.FromImage(bitmap))
+                if (penThickness == 0)
                 {
-                    using (Brush brush = new SolidBrush(MainForm.Color)) 
+                    return;
+                }
+
+                using (Brush brush = new SolidBrush(MainForm.currentColor))
+                using (Pen pen = new Pen(MainForm.currentColor, penThickness))
+                {
+                    switch (currentTool)
                     {
-                        if (currentTool == Tool.Pencil)
-                        {
-                        DrawCirclesBetween(x, y, e.X, e.Y, g, brush);
+                        case Tool.Pencil:
+                            DrawCirclesBetween(x, y, e.X, e.Y, Graphics.FromImage(bitmap), brush);
+                            x = e.X;
+                            y = e.Y;
+                            break;
+                        case Tool.Circle:
+                            bitmapTemp = (Bitmap)bitmap.Clone();
+                            using (Graphics graphicsLocal = Graphics.FromImage(bitmapTemp))
+                            {
+                                int rectX = Math.Min(x, e.X);
+                                int rectY = Math.Min(y, e.Y);
+                                int width = Math.Abs(e.X - x);
+                                int height = Math.Abs(e.Y - y);
+
+                                if (width > 0 && height > 0)
+                                {
+                                    graphicsLocal.DrawEllipse(pen, new Rectangle(rectX, rectY, width, height));
+                                }
+                            }
+                            break;
+                        case Tool.Line:
+                            bitmapTemp = (Bitmap)bitmap.Clone();
+                            using (Graphics graphicsLocal = Graphics.FromImage(bitmapTemp))
+                            {
+                                graphicsLocal.DrawLine(pen, x, y, e.X, e.Y);
+                            }
+                            break;
                     }
                 }
                 Invalidate();
-                Update();
-
-                x = e.X;
-                y = e.Y;
             }
         }
 
@@ -71,28 +105,55 @@ namespace Paint
 
             if (distance > penThickness)
             {
-                int numCircles = (int)(distance / penThickness); 
+                int numCircles = (int)(distance / penThickness);
                 for (int i = 0; i <= numCircles; i++)
                 {
                     float ratio = (float)i / numCircles;
                     int x = (int)(startX + ratio * (endX - startX));
                     int y = (int)(startY + ratio * (endY - startY));
                     g.FillEllipse(brush, x - penThickness, y - penThickness, penThickness * 2, penThickness * 2);
-                    g.DrawEllipse(new Pen(MainForm.Color), x - penThickness, y - penThickness, penThickness * 2, penThickness * 2);
+                    g.DrawEllipse(new Pen(MainForm.currentColor), x - penThickness, y - penThickness, penThickness * 2, penThickness * 2);
                 }
             }
             else
             {
                 g.FillEllipse(brush, endX - penThickness, endY - penThickness, penThickness * 2, penThickness * 2);
-                g.DrawEllipse(new Pen(MainForm.Color), endX - penThickness, endY - penThickness, penThickness * 2, penThickness * 2);
+                g.DrawEllipse(new Pen(MainForm.currentColor), endX - penThickness, endY - penThickness, penThickness * 2, penThickness * 2);
+            }
+        }
+
+        private void DocumentFormMouseUp(object sender, MouseEventArgs e)
+        {
+            if (penThickness == 0)
+            {
+                return;
+            }
+
+            if ((currentTool == Tool.Circle || currentTool == Tool.Line) && bitmapTemp != null)
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.DrawImage(bitmapTemp, 0, 0);
+                }
+                bitmapTemp.Dispose();
+                bitmapTemp = null;
+                Invalidate();
             }
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            e.Graphics.DrawImage(bitmap, 0, 0);
+            if ((currentTool == Tool.Circle || currentTool == Tool.Line) && bitmapTemp != null)
+            {
+                e.Graphics.DrawImage(bitmapTemp, 0, 0);
+            }
+            else
+            {
+                e.Graphics.DrawImage(bitmap, 0, 0);
+            }
         }
+
 
         //Dynamical change of bitmap if resize of form
         private void DocumentFormResize(object sender, EventArgs e)
@@ -119,9 +180,9 @@ namespace Paint
         {
             if (currentFilePath == null)
             {
-                SaveFileAs(); 
+                SaveFileAs();
             }
-            else 
+            else
             {
                 try
                 {
@@ -134,7 +195,7 @@ namespace Paint
             }
         }
 
-        public void SaveFileAs() 
+        public void SaveFileAs()
         {
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.AddExtension = true;
@@ -172,7 +233,7 @@ namespace Paint
                         currentFormat = ImageFormat.Jpeg;
                         break;
                     case ".png":
-                        currentFormat = ImageFormat.Png; 
+                        currentFormat = ImageFormat.Png;
                         break;
                 }
 
@@ -180,10 +241,10 @@ namespace Paint
 
                 Invalidate();
 
-                return true; 
+                return true;
             }
 
-            return false; 
+            return false;
         }
 
 
@@ -202,6 +263,7 @@ namespace Paint
         {
             SaveFile();
         }
+
+        
     }
 }
-
